@@ -8,17 +8,41 @@
       font-family: sans-serif;
       text-align: center;
       padding: 100px;
-      background-color: #f4f4f4;
+      background-color: #000;
+      color: #fff;
     }
-    #login-btn {
+
+    button {
       padding: 14px 28px;
       font-size: 18px;
       cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
     }
+
     #loading {
       display: none;
       font-size: 20px;
       margin-top: 30px;
+    }
+
+    #progress-container {
+      display: none;
+      width: 80%;
+      margin: 30px auto;
+      background: #333;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 24px;
+    }
+
+    #progress-bar {
+      width: 0%;
+      height: 100%;
+      background-color: #00bcd4;
+      transition: width 0.25s linear;
     }
   </style>
 </head>
@@ -27,24 +51,37 @@
   <button id="login-btn">Login to Dashboard</button>
   <div id="loading">Refreshing report... Please wait ⏳</div>
 
+  <div id="progress-container">
+    <div id="progress-bar"></div>
+  </div>
+
   <script>
     document.getElementById('login-btn').addEventListener('click', function () {
-      // Show loading
+      // Hide button, show loading UI
       document.getElementById('login-btn').style.display = 'none';
       document.getElementById('loading').style.display = 'block';
+      document.getElementById('progress-container').style.display = 'block';
 
-      // Trigger Make webhook
-      fetch('https://hook.us2.make.com/48b2c6kro9yq9xuuvb4dj1tuq6nhopox')  // ⬅️ REPLACE WITH YOUR WEBHOOK
-        .then(() => {
-          // Wait 30 seconds before redirect
-          setTimeout(() => {
-            window.location.href = 'report.html';
-          }, 30000);
-        })
-        .catch(err => {
-          alert("Error triggering refresh. Try again.");
-          console.error(err);
-        });
+      // Trigger Make.com webhook
+      fetch('https://hook.us1.make.com/YOUR_WEBHOOK_URL_HERE', { method: 'POST' });
+
+      // Animate progress bar over 45 seconds
+      const progressBar = document.getElementById('progress-bar');
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 100 / 180; // ~0.55% every 250ms over 45s
+        if (progress >= 100) {
+          progressBar.style.width = '100%';
+          clearInterval(interval);
+        } else {
+          progressBar.style.width = progress + '%';
+        }
+      }, 250);
+
+      // After 45 seconds, redirect
+      setTimeout(() => {
+        window.location.href = 'report.html';
+      }, 45000);
     });
   </script>
 </body>
