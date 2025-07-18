@@ -1,52 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login - Digital Dispo</title>
   <meta charset="UTF-8">
+  <title>Login to Dashboard</title>
   <style>
     body {
-      background: #111;
-      color: white;
       font-family: sans-serif;
       text-align: center;
-      padding-top: 100px;
+      padding: 100px;
+      background-color: #f4f4f4;
     }
-    button {
-      padding: 16px 32px;
-      font-size: 20px;
-      background: #00bcd4;
-      border: none;
-      border-radius: 8px;
+    #login-btn {
+      padding: 14px 28px;
+      font-size: 18px;
       cursor: pointer;
-      color: white;
     }
     #loading {
       display: none;
-      font-size: 18px;
-      margin-top: 40px;
+      font-size: 20px;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
   <h1>Welcome to Digital Dispo</h1>
-  <button onclick="login()">Login to Dashboard</button>
-  <div id="loading">Refreshing data... please wait.</div>
+  <button id="login-btn">Login to Dashboard</button>
+  <div id="loading">Refreshing report... Please wait ⏳</div>
 
   <script>
-    async function login() {
-      // 1. Trigger Make.com webhook
-      fetch("https://hook.us1.make.com/your-make-webhook-id", { method: "POST" });
+    document.getElementById('login-btn').addEventListener('click', function () {
+      // Show loading
+      document.getElementById('login-btn').style.display = 'none';
+      document.getElementById('loading').style.display = 'block';
 
-      // 2. Show loading message
-      document.querySelector("button").style.display = "none";
-      document.getElementById("loading").style.display = "block";
-
-      // 3. Wait 30 seconds
-      await new Promise(resolve => setTimeout(resolve, 30000));
-
-      // 4. Redirect to report page
-      window.location.href = "report.html";
-    }
+      // Trigger Make webhook
+      fetch('https://hook.us2.make.com/48b2c6kro9yq9xuuvb4dj1tuq6nhopox')  // ⬅️ REPLACE WITH YOUR WEBHOOK
+        .then(() => {
+          // Wait 30 seconds before redirect
+          setTimeout(() => {
+            window.location.href = 'report.html';
+          }, 30000);
+        })
+        .catch(err => {
+          alert("Error triggering refresh. Try again.");
+          console.error(err);
+        });
+    });
   </script>
 </body>
 </html>
+
