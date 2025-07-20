@@ -7,17 +7,21 @@
     html, body {
       margin: 0;
       padding: 0;
-      height: 100%;
       background-color: #0f0f0f;
+      height: 100%;
     }
 
-    .report-container {
+    .report-wrapper {
       position: relative;
       width: 100%;
-      height: 100vh; /* full visible screen height */
+      padding-top: 56.25%; /* 16:9 aspect ratio (9/16 = 0.5625) */
+      overflow: hidden;
     }
 
-    .report-container iframe {
+    .report-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       border: none;
@@ -25,7 +29,7 @@
   </style>
 </head>
 <body>
-  <div class="report-container">
+  <div class="report-wrapper">
     <iframe
       src="https://app.powerbi.com/reportEmbed?reportId=8a93d46c-a44d-4ea8-8852-aa33e8364ab5&autoAuth=true&ctid=d1c56a60-dcf2-4ba0-8d19-e41646e6ead8&fitToPage=true&navContentPaneEnabled=false&filterPaneEnabled=false"
       allowFullScreen="true"
