@@ -4,29 +4,34 @@
   <meta charset="UTF-8">
   <title>Digital Dispo Dashboard</title>
   <style>
-    /*  ─── reset ───  */
-    html,body {margin:0;padding:0;overflow:hidden;background:#0f0f0f;}
-
-    /*  ─── responsive shell – keeps 16:9 ───  */
-    .report-wrap{
-      position:relative;
-      width:100%;
-      /*  9 ÷ 16 = 0.5625 → 56.25 %  */
-      padding-top:56.25%;
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #0f0f0f;
+      height: 100%;
+      overflow: hidden;
     }
-    .report-wrap iframe{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      border:none;
+
+    .report-wrap {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .report-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
     }
   </style>
 </head>
-
 <body>
   <div class="report-wrap">
     <iframe
       title="Digital Dispo Dashboards v6.0"
-      src="https://app.powerbi.com/reportEmbed?reportId=8a93d46c-a44d-4ea8-8852-aa33e8364ab5&autoAuth=true&ctid=d1c56a60-dcf2-4ba0-8d19-e41646e6ead8"
+      src="https://app.powerbi.com/reportEmbed?reportId=8a93d46c-a44d-4ea8-8852-aa33e8364ab5&autoAuth=true&ctid=d1c56a60-dcf2-4ba0-8d19-e41646e6ead8&fitToPage=true&navContentPaneEnabled=false&filterPaneEnabled=false"
       allowFullScreen="true">
     </iframe>
   </div>
